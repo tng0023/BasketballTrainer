@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - testing@localhost" uuid="25a3e1a4-7c0e-45b0-bebf-a00382ed0710">
+    <database-info product="MySQL" version="5.7.12-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.4">
+      <schema id="1" name="testing"/>
+      <table id="2" parent="1" name="cubes"/>
+      <table id="3" parent="1" name="movie_reviews"/>
+      <table id="4" parent="1" name="snakes"/>
+      <table id="5" parent="1" name="training_appointments"/>
+      <table id="6" parent="1" name="training_schedule"/>
+      <column id="7" parent="2" name="name">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="8" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="9" parent="3" name="title">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="10" parent="3" name="year_released">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="11" parent="3" name="rating">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="12" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="13" parent="4" name="species">
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="14" parent="4" name="venom">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="15" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="16" parent="5" name="Trainer">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="17" parent="5" name="Trainee">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="18" parent="5" name="Training_Schedule">
+        <data-type>varchar(30)</data-type>
+      </column>
+      <column id="19" parent="5" name="Facility">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <key id="20" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="21" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="22" parent="6" name="Trainer">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="23" parent="6" name="Trainee">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <column id="24" parent="6" name="Date">
+        <data-type>date</data-type>
+      </column>
+      <column id="25" parent="6" name="Facility">
+        <data-type>varchar(50)</data-type>
+      </column>
+      <key id="26" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
