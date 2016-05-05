@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.Date;
 
 /**
  * Created by Tommy on 4/27/2016.
@@ -17,7 +18,6 @@ public class TrainerForm extends JFrame implements WindowListener {
     private JTable trainerDataTable;
     private JTextField trainerTextField;
     private JTextField traineeTextField;
-    private JTextField dateTextField;
     private JButton addToScheduleButton;
     private JButton deleteFromScheduleButton;
     private JButton quitButton;
@@ -28,6 +28,8 @@ public class TrainerForm extends JFrame implements WindowListener {
     private JComboBox facilityComboBox;
     private JComboBox trainingDrillComboBox;
     private JLabel trainingDrillLabel;
+    private JSpinner dateSpinner;
+    private JTextField phoneTextField;
 
     TrainerForm(final TrainerDataModel trainerDataTableModel) {
 
@@ -43,6 +45,8 @@ public class TrainerForm extends JFrame implements WindowListener {
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        //set date spinner
+        dateSpinner.setModel(new SpinnerDateModel());
 
         //set up JTable
         trainerDataTable.setGridColor(Color.BLACK);
@@ -68,29 +72,30 @@ public class TrainerForm extends JFrame implements WindowListener {
                     return;
                 }
 
-                String date = dateTextField.getText();
+                String phoneData = phoneTextField.getText();
 
-                if (date == null || date.trim().equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Please enter a valid date");
+                if(phoneData == null || phoneData.trim().equals("")){
+                    JOptionPane.showMessageDialog(rootPane,"Please enter a phone number");
                     return;
                 }
+
                 trainerTextField.setText("");
                 traineeTextField.setText("");
-                dateTextField.setText("");
+                phoneTextField.setText("");
 
-                if (facilityComboBox == null || facilityComboBox.equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Please enter a facility");
-                }
 
-                if (trainingDrillComboBox == null || trainingDrillComboBox.equals("")) {
-                    JOptionPane.showMessageDialog(rootPane, "Please enter a training drill");
-                }
+                Date date1 = (Date)dateSpinner.getModel().getValue();
 
-                    boolean insertedRow = trainerDataTableModel.insertRow(trainerData, traineeData, date, (String)trainingDrillComboBox.getSelectedItem(),(String)facilityComboBox.getSelectedItem());
+                    boolean insertedRow = trainerDataTableModel.insertRow(trainerData, traineeData, phoneData, date1.toString(), (String)trainingDrillComboBox.getSelectedItem(),(String)facilityComboBox.getSelectedItem());
 
                     if (!insertedRow) {
                         JOptionPane.showMessageDialog(rootPane, "Error adding new appointment");
+                    }else {
+                        JOptionPane.showMessageDialog(rootPane, "New appointment scheduled!");
+
                     }
+
+                //date1.toString().compareTo(TrainerDatabase.Date_COLUMN);
                 }
 
         });
@@ -114,6 +119,7 @@ public class TrainerForm extends JFrame implements WindowListener {
                 boolean deleted = trainerDataTableModel.deleteRow(currentRow);
                 if (deleted) {
                     TrainerDatabase.loadAllTrainers();
+                    JOptionPane.showMessageDialog(rootPane,"Appointment deleted!");
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Error deleting appointment");
                 }

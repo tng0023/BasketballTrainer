@@ -22,6 +22,7 @@ public class TrainerDatabase {
     //A primary key is needed to allow updates to the database on modifications to ResultSet
     public final static String Trainer_COLUMN = "Trainer";
     public final static String Trainee_COLUMN = "Trainee";
+    public final static String Phone_COLUMN = "Phone_Number";
     public final static String Date_COLUMN = "Training_Date";
     public final static String Facility_COLUMN = "Facility";
     public final static String Training_COLUMN = "Training_Drills";
@@ -96,7 +97,7 @@ public class TrainerDatabase {
             if (!trainerTableExists()) {
 
                 //Create a table in the database with 3 columns: Movie title, year and rating
-                String createTableSQL = "CREATE TABLE " + Trainer_Table_Name + " (" + PK_COLUMN + " int NOT NULL AUTO_INCREMENT, " + Trainer_COLUMN + " varchar(50), " + Trainee_COLUMN + " varchar(50), " + Date_COLUMN + " varchar(30) , " + Training_COLUMN + " VARCHAR(50)," +
+                String createTableSQL = "CREATE TABLE " + Trainer_Table_Name + " (" + PK_COLUMN + " int NOT NULL AUTO_INCREMENT, " + Trainer_COLUMN + " varchar(50), " + Trainee_COLUMN + " varchar(50), " + Phone_COLUMN + " varchar(10), " + Date_COLUMN + " varchar(30) , " + Training_COLUMN + " VARCHAR(50)," +
                         Facility_COLUMN + " VARCHAR(50), PRIMARY KEY(" + PK_COLUMN + "))";
                 System.out.println(createTableSQL);
                 statement.executeUpdate(createTableSQL);

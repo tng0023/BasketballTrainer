@@ -5,6 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.concurrent.TransferQueue;
 
 /**
  * Created by Tommy on 4/27/2016.
@@ -96,14 +97,39 @@ import java.util.Date;
         }
     }
 
+    @Override
+    public boolean isCellEditable(int row, int col) {
+        if (col == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    //This is called when user edits an editable cell
+    public void setValueAt(Object newValue, int row, int col) {
+
+        try {
+            String updatedTrainer = newValue.toString();
+            resultSet.absolute(row + 1);
+            resultSet.updateString(TrainerDatabase.Trainer_COLUMN, updatedTrainer);
+            resultSet.updateRow();
+            fireTableDataChanged();
+        } catch (SQLException e) {
+            System.out.println("error changing rating " + e);
+        }
+    }
+
+
     //returns true if successful, false if error occurs
-    public boolean insertRow(String trainer, String trainee, String date, String trainingDrill, String facility) {
+    public boolean insertRow(String trainer, String trainee,String phone, String date, String trainingDrill, String facility) {
 
         try {
             //Move to insert row, insert the appropriate data in each column, insert the row, move cursor back to where it was before we started
             resultSet.moveToInsertRow();
             resultSet.updateString(TrainerDatabase.Trainer_COLUMN, trainer);
             resultSet.updateString(TrainerDatabase.Trainee_COLUMN, trainee);
+            resultSet.updateString(TrainerDatabase.Phone_COLUMN, phone);
             resultSet.updateString(TrainerDatabase.Date_COLUMN, date);
             resultSet.updateString(TrainerDatabase.Facility_COLUMN, facility);
             resultSet.updateString(TrainerDatabase.Training_COLUMN, trainingDrill);
@@ -130,7 +156,7 @@ import java.util.Date;
             System.out.println("Error fetching column names" + se);
             return "?";
         }
-    }
+}
 
 
 }
