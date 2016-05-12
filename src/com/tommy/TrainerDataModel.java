@@ -10,6 +10,8 @@ import java.util.concurrent.TransferQueue;
 /**
  * Created by Tommy on 4/27/2016.
  */
+
+    //Class to set up table
     public class TrainerDataModel extends AbstractTableModel {
 
     private int rowCount = 0;
@@ -97,6 +99,7 @@ import java.util.concurrent.TransferQueue;
         }
     }
 
+    //Added to be able to edit Student column
     @Override
     public boolean isCellEditable(int row, int col) {
         if (col == 2) {
@@ -147,7 +150,7 @@ import java.util.concurrent.TransferQueue;
         }
 
     }
-
+    
     @Override
     public String getColumnName(int col){
         //Get from ResultSet metadata, which contains the database column names

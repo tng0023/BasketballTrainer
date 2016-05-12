@@ -72,7 +72,7 @@ public class TrainerForm extends JFrame implements WindowListener {
         trainerDataTable.setGridColor(Color.BLACK);
         trainerDataTable.setModel(trainerDataTableModel);
 
-
+        //Button to add scheduled session if all user input is correct
         addToScheduleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +126,7 @@ public class TrainerForm extends JFrame implements WindowListener {
 
         });
 
+        //quit button closes application
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -134,6 +135,7 @@ public class TrainerForm extends JFrame implements WindowListener {
             }
         });
 
+        //Delete button to delete scheduled session from database list
         deleteFromScheduleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -168,6 +170,8 @@ public class TrainerForm extends JFrame implements WindowListener {
                     JOptionPane.showMessageDialog(rootPane, "New trainer added!");
             }
         });
+
+        //Button to prompt user to add new facility
         addNewFacilityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.*;
 
 public class TrainerDatabase {
-
+        //set up database
         private static String DB_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
         private static final String DB_NAME = "testing";
         private static final String USER = "root";
@@ -17,6 +17,7 @@ public class TrainerDatabase {
         static Connection conn = null;
         static ResultSet rs = null;
 
+    //set up database table columns
     public final static String Trainer_Table_Name = "Training_Appointments";
     public final static String PK_COLUMN = "id";                   //Primary key column. Each trainee will have a unique ID.
     //A primary key is needed to allow updates to the database on modifications to ResultSet
