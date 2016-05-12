@@ -21,11 +21,13 @@ public class TrainerDatabase {
     public final static String PK_COLUMN = "id";                   //Primary key column. Each trainee will have a unique ID.
     //A primary key is needed to allow updates to the database on modifications to ResultSet
     public final static String Trainer_COLUMN = "Trainer";
-    public final static String Trainee_COLUMN = "Trainee";
+    public final static String Trainee_COLUMN = "Student";
     public final static String Phone_COLUMN = "Phone_Number";
     public final static String Date_COLUMN = "Training_Date";
+    //public final static String Time_COLUMN = "Training_Time";
     public final static String Facility_COLUMN = "Facility";
     public final static String Training_COLUMN = "Training_Drills";
+    public final static String Comments_COLUMN = "Notes";
 
     private static TrainerDataModel trainerDataModel;
 
@@ -96,13 +98,14 @@ public class TrainerDatabase {
             //Does the table exist? If not, create it.
             if (!trainerTableExists()) {
 
-                //Create a table in the database with 3 columns: Movie title, year and rating
-                String createTableSQL = "CREATE TABLE " + Trainer_Table_Name + " (" + PK_COLUMN + " int NOT NULL AUTO_INCREMENT, " + Trainer_COLUMN + " varchar(50), " + Trainee_COLUMN + " varchar(50), " + Phone_COLUMN + " varchar(10), " + Date_COLUMN + " varchar(30) , " + Training_COLUMN + " VARCHAR(50)," +
-                        Facility_COLUMN + " VARCHAR(50), PRIMARY KEY(" + PK_COLUMN + "))";
+                //Create a table in the database
+                String createTableSQL = "CREATE TABLE " + Trainer_Table_Name + " (" + PK_COLUMN + " int NOT NULL AUTO_INCREMENT, " + Trainer_COLUMN + " varchar(50), " + Trainee_COLUMN + " varchar(50), " + Phone_COLUMN + " varchar(15), " + Date_COLUMN + " varchar(30) ," + Training_COLUMN + " VARCHAR(50)," +
+                        Facility_COLUMN + " VARCHAR(50)," + Comments_COLUMN + " varchar(200), PRIMARY KEY(" + PK_COLUMN + "))";
                 System.out.println(createTableSQL);
                 statement.executeUpdate(createTableSQL);
 
                 System.out.println("Created Training_Appointments table");
+
                 // Add some test data -
                 //Here we have to specify which columns the data will go into, because we want to omit the ID column and have MySQL fill it in for us.
                 //But, since we are only adding 3 pieces of data for 4 columns, we have to specify which columns each data item is for.
@@ -112,6 +115,7 @@ public class TrainerDatabase {
 //                statement.executeUpdate(addDataSQL);
 //                addDataSQL = "INSERT INTO " + Trainer_Table_Name +  "(" + Trainer_COLUMN + ", " + Trainee_COLUMN + ", " + Date_COLUMN + "," + Facility_COLUMN + ")" + " VALUES ('Tracy Mcgrady', 'Tommy Ng', 'Jan 7', 'United Center')";
 //                statement.executeUpdate(addDataSQL);
+
             }
             return true;
 

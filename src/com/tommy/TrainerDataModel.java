@@ -99,7 +99,7 @@ import java.util.concurrent.TransferQueue;
 
     @Override
     public boolean isCellEditable(int row, int col) {
-        if (col == 1) {
+        if (col == 2) {
             return true;
         }
         return false;
@@ -110,9 +110,9 @@ import java.util.concurrent.TransferQueue;
     public void setValueAt(Object newValue, int row, int col) {
 
         try {
-            String updatedTrainer = newValue.toString();
+            String updatedTrainee = newValue.toString();
             resultSet.absolute(row + 1);
-            resultSet.updateString(TrainerDatabase.Trainer_COLUMN, updatedTrainer);
+            resultSet.updateString(TrainerDatabase.Trainee_COLUMN, updatedTrainee);
             resultSet.updateRow();
             fireTableDataChanged();
         } catch (SQLException e) {
@@ -122,17 +122,19 @@ import java.util.concurrent.TransferQueue;
 
 
     //returns true if successful, false if error occurs
-    public boolean insertRow(String trainer, String trainee,String phone, String date, String trainingDrill, String facility) {
+    public boolean insertRow(String trainer, String student,String phone, String date, String trainingDrill, String facility, String comments) {
 
         try {
             //Move to insert row, insert the appropriate data in each column, insert the row, move cursor back to where it was before we started
             resultSet.moveToInsertRow();
             resultSet.updateString(TrainerDatabase.Trainer_COLUMN, trainer);
-            resultSet.updateString(TrainerDatabase.Trainee_COLUMN, trainee);
+            resultSet.updateString(TrainerDatabase.Trainee_COLUMN, student);
             resultSet.updateString(TrainerDatabase.Phone_COLUMN, phone);
             resultSet.updateString(TrainerDatabase.Date_COLUMN, date);
+//            resultSet.updateString(TrainerDatabase.Time_COLUMN, time);
             resultSet.updateString(TrainerDatabase.Facility_COLUMN, facility);
             resultSet.updateString(TrainerDatabase.Training_COLUMN, trainingDrill);
+            resultSet.updateString(TrainerDatabase.Comments_COLUMN, comments);
             resultSet.insertRow();
             resultSet.moveToCurrentRow();
             fireTableDataChanged();
@@ -149,7 +151,6 @@ import java.util.concurrent.TransferQueue;
     @Override
     public String getColumnName(int col){
         //Get from ResultSet metadata, which contains the database column names
-        //TODO translate DB column names into something nicer for display, so "YEAR_RELEASED" becomes "Year Released"
         try {
             return resultSet.getMetaData().getColumnName(col + 1);
         } catch (SQLException se) {
